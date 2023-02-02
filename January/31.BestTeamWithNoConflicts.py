@@ -38,6 +38,7 @@ class Solution:
     def bestTeamScore(self, scores: [int], ages: [int]) -> int:
         n = len(scores)
         players = sorted(zip(ages, scores))
+        print(players)
         dp = [0] * n
         for i in range(n):
             score = players[i][1]
