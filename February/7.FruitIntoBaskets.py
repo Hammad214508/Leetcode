@@ -37,27 +37,19 @@ Constraints:
 
 class Solution:
     def totalFruit(self, fruits: List[int]) -> int:
-        # Hash map 'basket' to store the types of fruits.
-        basket = {}
-        left = 0
-
-        # Add fruit from the right index (right) of the window.
-        for right, fruit in enumerate(fruits):
-            basket[fruit] = basket.get(fruit, 0) + 1
-
-            # If the current window has more than 2 types of fruit,
-            # we remove one fruit from the left index (left) of the window.
-            if len(basket) > 2:
-                basket[fruits[left]] -= 1
-
-                # If the number of fruits[left] is 0, remove it from the basket.
-                if basket[fruits[left]] == 0:
-                    del basket[fruits[left]]
-                left += 1
-
-        # Once we finish the iteration, the indexes left and right
-        # stands for the longest valid subarray we encountered.
-        return right - left + 1
+        start = 0
+        end = 0
+        max_len = 0
+        d = {}
+        while end < len(tree):
+            d[tree[end]] = end
+            if len(d) >= 3:
+                min_val = min(d.values())
+                del d[tree[min_val]]
+                start = min_val + 1
+            max_len = max(max_len, end - start + 1)
+            end += 1
+        return max_len
 
 solution = Solution()
 fruits = [1,2,1]
